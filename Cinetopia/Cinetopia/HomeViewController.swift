@@ -8,15 +8,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
- 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .background
-        addSubViews()
-        setupConstraints()
-        
-    }
     
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage.logo)
@@ -53,9 +44,24 @@ class HomeViewController: UIViewController {
         buttom.setTitleColor(.background, for: .normal)
         buttom.titleLabel?.font = .boldSystemFont(ofSize: 20)
         buttom.layer.cornerRadius = 32
+        buttom.addTarget(self, action: #selector(buttonPressed), for:
+                .touchUpInside)
 
         return buttom
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .background
+        addSubViews()
+        setupConstraints()
+        
+    }
+    
+    @objc private func buttonPressed(){
+        print("Botao pressionado")
+    }
     
     private func addSubViews(){
         view.addSubview(logoImageView)
