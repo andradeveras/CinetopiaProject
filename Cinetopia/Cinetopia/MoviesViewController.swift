@@ -7,25 +7,8 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
-    }//Retorna a Quantidade de linhas que a tabela terá...
-    
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
-        //cell.textLabel?.text = names[indexPath.row]
-         var configuration = cell.defaultContentConfiguration()
-         configuration.text = names[indexPath.row]
-         configuration.textProperties.color = .white
-         cell.contentConfiguration = configuration
-         cell.backgroundColor = .clear
-         
-        return cell
-    }// Retona as celulas da tabela criada
-    
-    
+class MoviesViewController: UIViewController {
+
     var names: [String] = [
         "Ana", "Geovanna" , "Leonardo", "Matheus"
     ]
@@ -35,6 +18,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         tableView.dataSource = self //O self representa a class moviesViewController, sendo a fonte de dados para a tabela
+        tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "nameCell")
         return tableView
     }()
@@ -83,4 +67,27 @@ class MoviesViewController: UIViewController, UITableViewDataSource {
     }
     */
 
+}
+
+extension MoviesViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return names.count
+    }//Retorna a Quantidade de linhas que a tabela terá...
+    
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
+        //cell.textLabel?.text = names[indexPath.row]
+         var configuration = cell.defaultContentConfiguration()
+         configuration.text = names[indexPath.row]
+         configuration.textProperties.color = .white
+         cell.contentConfiguration = configuration
+         cell.backgroundColor = .clear
+         
+        return cell
+    }// Retona as celulas da tabela criada
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
