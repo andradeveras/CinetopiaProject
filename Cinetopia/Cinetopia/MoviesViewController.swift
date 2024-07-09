@@ -7,12 +7,35 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+class MoviesViewController: UIViewController, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return names.count
+    }//Retorna a Quantidade de linhas que a tabela terá...
+    
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
+        //cell.textLabel?.text = names[indexPath.row]
+         var configuration = cell.defaultContentConfiguration()
+         configuration.text = names[indexPath.row]
+         configuration.textProperties.color = .white
+         cell.contentConfiguration = configuration
+         cell.backgroundColor = .clear
+         
+        return cell
+    }// Retona as celulas da tabela criada
+    
+    
+    var names: [String] = [
+        "Ana", "Geovanna" , "Leonardo", "Matheus"
+    ]
     
     private lazy var tableView: UITableView = {
        let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
+        tableView.dataSource = self //O self representa a class moviesViewController, sendo a fonte de dados para a tabela
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "nameCell")
         return tableView
     }()
     
