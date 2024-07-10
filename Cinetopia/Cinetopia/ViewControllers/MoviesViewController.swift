@@ -15,7 +15,7 @@ class MoviesViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.dataSource = self //O self representa a class moviesViewController, sendo a fonte de dados para a tabela
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "movieCell")
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "movieCell")
         return tableView
     }()
     
@@ -72,18 +72,28 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate{
     }//Retorna a Quantidade de linhas que a tabela terá...
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath)
-        //cell.textLabel?.text = names[indexPath.row]
-         var configuration = cell.defaultContentConfiguration()
-         configuration.text = movies[indexPath.row].title
-         configuration.textProperties.color = .white
-         cell.contentConfiguration = configuration
-         cell.backgroundColor = .clear
+         if let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as? MovieTableViewCell {
+             cell.congifureCell(movie: movies[indexPath.row])
+             cell.selectionStyle = .none
+             return cell
+         }
+
+            
+
+//cell.textLabel?.text = names[indexPath.row]
+// var configuration = cell.defaultContentConfiguration()
+//         configuration.text = movies[indexPath.row].title
+//         configuration.textProperties.color = .white
+//         cell.contentConfiguration = configuration
+//         cell.backgroundColor = .clear
          
-        return cell
+         
+        return UITableViewCell()
     }// Retona as celulas da tabela criada
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let detailsVC = MovieDetailsViewController(movie: movies[indexPath.row])
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
