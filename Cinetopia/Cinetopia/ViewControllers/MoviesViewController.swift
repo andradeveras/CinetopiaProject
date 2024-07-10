@@ -8,10 +8,6 @@
 import UIKit
 
 class MoviesViewController: UIViewController {
-
-    var names: [String] = [
-        "Ana", "Geovanna" , "Leonardo", "Matheus"
-    ]
     
     private lazy var tableView: UITableView = {
        let tableView = UITableView()
@@ -19,7 +15,7 @@ class MoviesViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.dataSource = self //O self representa a class moviesViewController, sendo a fonte de dados para a tabela
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "nameCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "movieCell")
         return tableView
     }()
     
@@ -72,14 +68,14 @@ class MoviesViewController: UIViewController {
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        return movies.count
     }//Retorna a Quantidade de linhas que a tabela terá...
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath)
         //cell.textLabel?.text = names[indexPath.row]
          var configuration = cell.defaultContentConfiguration()
-         configuration.text = names[indexPath.row]
+         configuration.text = movies[indexPath.row].title
          configuration.textProperties.color = .white
          cell.contentConfiguration = configuration
          cell.backgroundColor = .clear
