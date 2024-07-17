@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C80615E32C3B4F8B009BC897 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80615E22C3B4F8B009BC897 /* MoviesViewController.swift */; };
+		C82C29B22C48446800619B11 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C29B12C48446800619B11 /* MovieService.swift */; };
 		C83C987B2C386E5B002184B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83C987A2C386E5B002184B0 /* AppDelegate.swift */; };
 		C83C987D2C386E5B002184B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83C987C2C386E5B002184B0 /* SceneDelegate.swift */; };
 		C83C987F2C386E5B002184B0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83C987E2C386E5B002184B0 /* HomeViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		C80615E22C3B4F8B009BC897 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		C82C29B12C48446800619B11 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		C83C98772C386E5B002184B0 /* Cinetopia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinetopia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C83C987A2C386E5B002184B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C83C987C2C386E5B002184B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C82C29B02C48444900619B11 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C82C29B12C48446800619B11 /* MovieService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		C83C986E2C386E5B002184B0 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +72,7 @@
 		C83C98792C386E5B002184B0 /* Cinetopia */ = {
 			isa = PBXGroup;
 			children = (
+				C82C29B02C48444900619B11 /* Services */,
 				C8A8CFAD2C3EDCD500B9F3F8 /* Cells */,
 				C8A8CFAA2C3ED4F500B9F3F8 /* Models */,
 				C8A8CFA82C3ED49A00B9F3F8 /* ViewControllers */,
@@ -176,6 +187,7 @@
 				C8A8CFB12C3EF6CE00B9F3F8 /* MovieDetailsViewController.swift in Sources */,
 				C83C987D2C386E5B002184B0 /* SceneDelegate.swift in Sources */,
 				C80615E32C3B4F8B009BC897 /* MoviesViewController.swift in Sources */,
+				C82C29B22C48446800619B11 /* MovieService.swift in Sources */,
 				C8A8CFAC2C3ED53500B9F3F8 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
