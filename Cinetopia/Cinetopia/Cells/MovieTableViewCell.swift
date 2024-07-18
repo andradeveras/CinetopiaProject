@@ -43,8 +43,30 @@ class MovieTableViewCell: UITableViewCell {
     
     func congifureCell(movie: Movie){
         movieTitleLabel.text = movie.title
-        moviePosterImageView.image = UIImage(named: movie.image)
+        //moviePosterImageView.image = UIImage(named: movie.image)
+        if let imageUrl = URL(string: movie.image) {
+                URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                    if let error = error {
+                        print("Erro ao carregar a imagem: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let data = data else {
+                        print("Dados da imagem estão vazios.")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.moviePosterImageView.image = UIImage(data: data)
+                    }
+                }.resume()
+            } else {
+                print("URL da imagem inválida: \(movie.image)")
+                // Você pode definir uma imagem padrão aqui se a URL for inválida
+                self.moviePosterImageView.image = UIImage(named: "default_movie_poster")
+            }
         movieReleaseDateLabel.text = "Lançamento: \(movie.releaseDate)"
+        
     }
     
     private func addSubviews() {
@@ -56,9 +78,12 @@ class MovieTableViewCell: UITableViewCell {
     private func setupConstraints(){
         NSLayoutConstraint.activate([
             moviePosterImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            moviePosterImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             moviePosterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            moviePosterImageView.widthAnchor.constraint(equalToConstant: 100),
+            moviePosterImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+        
+            moviePosterImageView.widthAnchor.constraint(equalToConstant: 100),// Ajuste a largura conforme necessário
+            moviePosterImageView.heightAnchor.constraint(equalToConstant: 150), // Altura proporcional à largura
+
             
             movieTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor,constant: -16),
             movieTitleLabel.leadingAnchor.constraint(equalTo: moviePosterImageView.trailingAnchor, constant: 16),
@@ -94,3 +119,4 @@ class MovieTableViewCell: UITableViewCell {
     }
 
 }
+

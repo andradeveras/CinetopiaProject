@@ -10,6 +10,8 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
     
     var movie: Movie
+    var movieImage: UIImage? // Propriedade para armazenar a imagem do filme
+
     
     init(movie: Movie) {
         self.movie = movie
@@ -68,6 +70,7 @@ class MovieDetailsViewController: UIViewController {
         view.backgroundColor = .background
         addSubViews()
         setupConstraints()
+        loadImage()
         // Do any additional setup after loading the view.
         
     }
@@ -99,12 +102,26 @@ class MovieDetailsViewController: UIViewController {
             
         ])
     }
-    
-    
-   
+    private func loadImage() {
+           guard let imageUrl = URL(string: movie.image) else { return }
+           
+           // Download da imagem assíncrono
+           URLSession.shared.dataTask(with: imageUrl) { [weak self] (data, response, error) in
+               guard let self = self, let data = data, error == nil else {
+                   print("Erro ao baixar imagem:", error?.localizedDescription ?? "Erro desconhecido")
+                   return
+               }
+               
+               // Configurar a imagem na thread principal
+               DispatchQueue.main.async {
+                   self.showMoviePosterImageView.image = UIImage(data: data)
+               }
+           }.resume()
+       }
+}
 
-        // Configure the view for the selected state
-    }
+
+
 
     
 
